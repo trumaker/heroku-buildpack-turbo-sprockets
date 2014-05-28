@@ -12,7 +12,7 @@ class LanguagePack::Rails4 < LanguagePack::Rails3
       rails_version = bundler.gem_version('railties')
       return false unless rails_version
       is_rails4 = rails_version >= Gem::Version.new('4.0.0.beta') &&
-                  rails_version <  Gem::Version.new('5.0.0')
+                  rails_version <  Gem::Version.new('4.1.0.beta1')
       return is_rails4
     end
   end
@@ -95,8 +95,7 @@ WARNING
           @cache.store public_assets_folder
           @cache.store default_assets_cache
         else
-          log "assets_precompile", :status => "failure"
-          error "Precompiling assets failed."
+          precompile_fail(precompile.output)
         end
       end
     end
